@@ -58,7 +58,9 @@ const HomePage = () => {
                             <AiOutlineLeftCircle onClick={prevSlide} size={40} color='#0EA5E9' />
                         </div>
                         <div class="w-full lg:w-6/12 px-6" style={{height : 500, alignContent:"center"}}>
-                            <img src={Corousel[currentIndex]?.url} alt="..." className='rounded max-h-full w-full' style={{width: "auto", height: "100%"}}/>
+                            <center>
+                                <img src={Corousel[currentIndex]?.url} alt="..." className='rounded max-h-full w-full' style={{width: "auto", height: "500px"}}/>
+                            </center>
                         </div>
                         {/* Right Arrow */}
                         <div className=''>

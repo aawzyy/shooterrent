@@ -15,6 +15,7 @@ import {
   adduUserWishlist,
   checkAppointMent,
   getDetailProduct,
+  getConverstationVendor
 } from "../../services/enpoint/costumer";
 import {
   getConverstation,
@@ -77,6 +78,19 @@ export default function DetailPage() {
     });
   };
 
+  const handleChat = async (props) => {
+    getConverstationVendor(token, props)
+    .then((result) => {
+        const res = result?.data
+        history.push({
+            pathname : '/costumer/list-chats/detail',
+            state : { ...res }
+         })
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
   const handleBooking = async (event) => {
     // event.preventDefault();
     let x = document.getElementById("alamat").value;
@@ -87,7 +101,7 @@ export default function DetailPage() {
       alert("pilih paket must be filled out");
       return false;
     } else if (
-      window.confirm("apakah pesanan sudah sesuai ?" )
+      window.confirm("apakah pesanan sudah sesuai ?")
     ) {
       const date = startDate ? formatDateString(startDate.toString()) : "";
       const dataPost = {
@@ -159,6 +173,8 @@ export default function DetailPage() {
       });
     getListOrders();
   }, []);
+
+  
 
   return (
     <>
@@ -253,11 +269,13 @@ export default function DetailPage() {
                 <div className="row flex">
                   <a
                     href="#pablo"
-                    onClick={() => handleAddWhislist(dataProduct.id)}
+                    onClick={() => handleAddWhislist(id_vendor)}
                   >
                     <AiFillHeart size={20} className="mr-3 ml-3" />
                   </a>
-                  <a href="#pablo">
+                  <a href="#pablo"
+                    onClick={()=> handleChat(dataProduct.id)}
+                  >
                     <BsFillChatFill size={17} className="ml-2" />
                   </a>
                 </div>

@@ -47,6 +47,7 @@ export default function DetailPage() {
   const [today] = useState(new Date());
   const [selectPackets, setSelectPackets] = useState({});
   const [startDate, setStartDate] = useState(new Date());
+  const [start] =useState(new Date(startDate.getFullYear() + '-' + (startDate.getMonth() + 1) + '-' + startDate.getDate()));
   const [formChart, setformChart] = useState({
     full_name: "",
   });
@@ -306,9 +307,9 @@ export default function DetailPage() {
                 filterDate={(date) => {
                   return today< date;
                 }}
-                excludeDates={[]}
+                excludeDates={[2023-6-25]}
                 className="rounded mt-2 w-full"
-                dateFormat="Pp"
+                format="yyyy-MM-dd"
               />
               <hr className="my-4" />
               <label>Masukan Alamat</label>

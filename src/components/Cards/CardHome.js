@@ -193,7 +193,7 @@ export default function CardHome() {
                                                         <h4 className="mt-4 text-lg font-bold text-gray-500 text-left">Nama : {val?.customer?.fullname}</h4>
                                                         <p className="text-sm font-semibold text-red-500 mt-1">{val?.appointment_date}</p>
                                                         <p className="text-sm font-semibold text-warmGray-300 mt-1">Tanggal : {val.appointment_date}</p>
-                                                        <p className="text-sm font-semibold text-trueGray-300 mt-1">Jam : {val.appointment_time}</p>
+                                                        
                                                     </div>
                                                 </div>
                                                 <div className="w-1/6 flex flex-wrap justify-center items-center">

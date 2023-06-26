@@ -124,7 +124,7 @@ export default function Navbar() {
                           : "text-blueGray-300")
                       }
                     ></i>{" "}
-                    Chat
+                    Obrolan
                   </button>
                 </Link>
               </li>

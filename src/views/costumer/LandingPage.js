@@ -231,7 +231,7 @@ export default function LandingPage() {
 
                           <div className="ml-1 flex p-3">
                             <RiStarSFill size={16} className='mr-1' color='#FFC26F'/>
-                            <p>{vl?.average_rating}/{vl?.average_rating}</p>
+                            <p>{vl?.average_rating.toFixed(1)}/5</p>
                           </div>
                           <div className="ml-1 p-3">
                             <h2>{vl?.total_orders}x pesanan</h2>
@@ -272,7 +272,7 @@ export default function LandingPage() {
 
                           <div className="ml-1 flex p-3">
                             <RiStarSFill size={16} className='mr-1' color='#FFC26F'/>
-                            <p>{vl?.average_rating}/{vl?.average_rating}</p>
+                            <p>{vl?.average_rating.toFixed(1)}/5</p>
                           </div>
                           <div className="ml-1 p-3">
                             <h2>{vl?.total_orders}x pesanan</h2>
@@ -313,7 +313,7 @@ export default function LandingPage() {
 
                             <div className="ml-1 flex p-3">
                             <RiStarSFill size={16} className='mr-1' color='#FFC26F'/>
-                            <p>{v?.average_rating}/{v?.average_rating}</p>
+                            <p>{v?.average_rating.toFixed(1)}/5</p>
                           </div>
                           <div className="ml-1 p-3">
                             <h2>{v?.total_orders}x pesanan</h2>
@@ -354,7 +354,7 @@ export default function LandingPage() {
 
                           <div className="ml-1 flex p-3">
                             <RiStarSFill size={16} className='mr-1' color='#FFC26F'/>
-                            <p>{val?.average_rating}/{val?.average_rating}</p>
+                            <p>{val?.average_rating.toFixed(1)}/5</p>
                           </div>
                           <div className="ml-1 p-3">
                             <h2>{val?.total_orders}x pesanan</h2>

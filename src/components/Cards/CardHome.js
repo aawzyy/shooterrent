@@ -130,7 +130,7 @@ export default function CardHome() {
                                         <a href='#pablo' className="p-4 hover:scale-105 duration-500">
                                             <div className="justify-between p-5 rounded-lg bg-white shadow-indigo-50 shadow-md">
                                                 <div className='flex items=center text-center'>
-                                                    <h4 className="w-1/3 text-lg font-bold text-red-500 text-left">Rating : </h4>
+                                                    <h4 className="w-1/3 text-lg font-bold text-red-500 text-left">Penilaian : </h4>
                                                     <div className='w-full flex border-0 px-3 py-3 mb-2 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150'>
                                                         {arry.map((v,k) => (
                                                             <RiStarSFill size={16} color='#FFC26F'/>
@@ -147,7 +147,7 @@ export default function CardHome() {
                                                     />
                                                 </div>
                                                 <div className='flex items=center text-center mt-2'>
-                                                    <h4 className="w-1/3 text-lg font-bold text-red-500 text-left">Ula san : </h4>
+                                                    <h4 className="w-1/3 text-lg font-bold text-red-500 text-left">Ulasan : </h4>
                                                     <input
                                                         disabled
                                                         type="text"
@@ -191,7 +191,7 @@ export default function CardHome() {
                                                     {/* <MdAccountCircle size={50} className='mt-4'/> */}
                                                     <div className='ml-3'>
                                                         <h4 className="mt-4 text-lg font-bold text-gray-500 text-left">Nama : {val?.customer?.fullname}</h4>
-                                                        <p className="text-sm font-semibold text-red-500 mt-1">{val?.appointment_date}</p>
+                                                        <p className="text-sm font-semibold text-red-500 mt-1">{val?.product_name}</p>
                                                         <p className="text-sm font-semibold text-warmGray-300 mt-1">Tanggal : {val.appointment_date}</p>
                                                         
                                                     </div>

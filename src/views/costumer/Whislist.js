@@ -44,7 +44,7 @@ export default function WhislistPage() {
         <>
             <section className="dark:bg-gray-900 min-h-screen h-full relative w-full">
                 <div className="container mx-auto px-3 py-3">
-                    <h1 className="text-3xl text-center font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">Kesukaan Anda</h1>
+                    <h1 className="text-3xl text-center font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">Favorit Anda</h1>
                     <div className="p-5 mt-4">
                         {ListWhistlist.map((val,key) => {
                             return(

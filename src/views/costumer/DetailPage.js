@@ -130,7 +130,7 @@ export default function DetailPage() {
             });
           } else if (res.error) {
             alert(
-              res.error + " " + "Jadwal Vendor Tidak Tersedia Untuk Hari Itu!!"
+              res.error + " " + "Jadwal Fotografer Tidak Tersedia Untuk tanggal tersebut, silahkan pilih tanggal yang lain"
             );
           }
         })

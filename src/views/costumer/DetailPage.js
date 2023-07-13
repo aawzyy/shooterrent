@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
-import MapContainer from '../.././components/Maps/GoogleApiWrapper';
 import { Map, GoogleApiWrapper, Marker, Geocoder } from "google-maps-react";
 
 // icons

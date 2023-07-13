@@ -24,6 +24,7 @@ export default function CardProductVendor() {
     const [changeAdd, setchangeAdd] = useState(false)
     const [Id, setId] = useState(null)
     const [dataEdit, setData] = useState(null)
+    const [ waktu , setTime ] = useState ( new Date ( ) ) ;
 
     const [formPaket, setFormPaket] = useState({
         name_paket : '',
@@ -82,7 +83,7 @@ export default function CardProductVendor() {
         AddPackets(token, dataPost)
         .then((result) => {
             console.log(result);
-            setchangeAdd(false)
+            setchangeAdd(false);
             getListProduct(filterAsc, filter)
         }).catch((err) => {
             console.log(err);
@@ -95,25 +96,33 @@ export default function CardProductVendor() {
         //   desc : '',
         // })
     }
+    
+
+
 
     const handleDeletePacket = (id) => {
-        setId(id)
-        setShowModalDelete(true)
+        setId(id);
+        setShowModalDelete(true);
+        
+    }
+    const handledeletsukses =  () => {
+        setShowModalDelete(false);
+        getListProduct('desc', 'id');
+        
     }
 
     const handleEditPacket = (data) => {
-        setData(data)
-        setShowModal(true)
+        setData(data);
+        setShowModal(true)        
+    }
+    const handleeditsukses =  () => {
+        setShowModal(false);
+        getListProduct('desc', 'id');
+        
     }
 
     const handleAdd = async () => {
         setchangeAdd(!changeAdd)
-    }
-
-    const FilterButton = async () => {
-        const filBy = filterBy
-        const filDsccAsc = filterDescAsc ? filterDescAsc : 'asc'
-        getListProduct(filDsccAsc, filBy)
     }
 
     const ResetFilter = async () => {
@@ -237,7 +246,7 @@ export default function CardProductVendor() {
                                 </>
                             :null }
                             <div className="row flex">
-                                <FilterDescAsc  setSelectProject={setFilterDescAsc}/>
+                                {/* <FilterDescAsc  setSelectProject={setFilterDescAsc}/>
                                 <FilterBy  setSelectProject={setFilterBy}/>
                                 <div className="text-center flex justify-between h-12 mt-2 ml-4" style={{height:35, marginLeft: 10}}>
                                     <button
@@ -250,7 +259,7 @@ export default function CardProductVendor() {
                                     >
                                     {'Terapkan'}
                                     </button>
-                                </div>
+                                </div> */}
                                 {/* <div className="text-center flex justify-between h-12 mt-2 ml-4" style={{height:35, marginLeft: 10}}>
                                     <button
                                         className={
@@ -267,7 +276,7 @@ export default function CardProductVendor() {
                             {/* LIST PAKET  */}
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
                             <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-                                List Paket Yang Anda Buat
+                                List Paket Anda
                             </h6>
 
                             <div className="flex flex-wrap">
@@ -317,12 +326,12 @@ export default function CardProductVendor() {
             </div>
             <ModalEdits
                 isOpen={showModal}
-                onClose={() => setShowModal(false)}
+                onClose={()=>handleeditsukses()}
                 data={dataEdit}
             />
             <ModalDeletePaket
                 isOpen={showModalDelete}
-                onClose={() => setShowModalDelete(false)}
+                onClose={()=>handledeletsukses()}
                 data={Id}
             />
         </>

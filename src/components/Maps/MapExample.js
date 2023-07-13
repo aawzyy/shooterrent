@@ -1,5 +1,6 @@
 import React from "react";
 import useGeoLocation from "../../hooks/useGeolocation";
+import {useJsApiLoader} from "@react-google-maps/api"
 
 function MapExample({props}) {
   const mapRef = React.useRef(null);
@@ -7,13 +8,14 @@ function MapExample({props}) {
   React.useEffect(() => {
     let google = window.google;
     let map = mapRef.current;
-    let lat = props?.lat ? props?.lat : '-6.200511971721622';
-    let lng = props?.lang ? props?.lang : '106.849624984375';
+    let lat = props.lat;
+    let lng = props.lng;
+ 
     // let lat = '-6.200511971721622';
     // let lng = '106.849624984375';
     const myLatlng = new google.maps.LatLng(lat, lng);
     const mapOptions = {
-      zoom: 12,
+      zoom: 15,
       center: myLatlng,
       scrollwheel: false,
       zoomControl: true,

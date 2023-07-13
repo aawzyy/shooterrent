@@ -124,7 +124,7 @@ export default function Navbar() {
                           : "text-blueGray-300")
                       }
                     ></i>{" "}
-                    Obrolan
+                    Pesan
                   </button>
                 </Link>
               </li>
@@ -148,7 +148,7 @@ export default function Navbar() {
                         : "text-blueGray-300")
                     }
                   ></i>{" "}
-                  Pengaturan
+                  Profil
                   </button>
                  
                 </Link>

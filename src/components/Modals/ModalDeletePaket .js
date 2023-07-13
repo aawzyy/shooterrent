@@ -9,16 +9,21 @@ export default function ModalDeletePaket({ isOpen, onClose, data }) {
   const { full_name , roles , email} = dataUsers?.userDatas
   const { login , token} = dataToken?.token
 
-  function DeletePakect() {
+
+  
+
+  async function DeletePakect() {
     deletePackets(token, data)
       .then((result) => {
           console.log(result);
           alert('berhasil delete paket ini')
-          // onClose()
-          window.location.reload()
+          onClose()
+      
+          
       }).catch((err) => {
           console.log(err);
       });
+
   }
 
   // console.log(data);

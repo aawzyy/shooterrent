@@ -134,6 +134,9 @@ export default function LandingPage() {
   const handleChangeSearch = (e) => {
     setSearchValue(e.target.value)
   }
+  const cek = ()=>{
+    console.log(location)
+  }
 
   return (
     <>
@@ -142,14 +145,11 @@ export default function LandingPage() {
           <h1 className="text-3xl text-center font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">Fotografer Untuk Anda</h1>
 
             {/* Filter And Search  */}
+            
             <div className='flex rows items-center mt-2'>
               <button onClick={() => setChangeFilter(!changeFilter)} className='p-2 flex rows' type='button'>
                 <BiSlider size={25}/>
                 <h2 className='ml-3 uppercase font-bold'>Filter</h2>
-              </button>
-              <button className='flex rows bg-blueGray-600 p-2 ml-3 rounded-sm' type='button' onClick={() => handleClearFilter()}>
-                <AiOutlineCloseCircle size={20} color='#ffffff' className='mt-0.5'/>
-                <h2 className='ml-1 text-white uppercase font-bold'>Hapus Filter</h2>
               </button>
 
               <form onSubmit={handleSearch} className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3">
@@ -205,6 +205,11 @@ export default function LandingPage() {
                       <button className='ml-3 mb-3 p-2 bg-blueGray-600 rounded-lg text-white' type='submit' style={{width : 100}}>
                         Cari
                       </button>
+                      <button className='ml-3 mb-3 p-2 bg-blueGray-600 rounded-lg text-white' type='button' style={{width : 300}} onClick={() => handleClearFilter()}>
+                        
+                        Hapus Filter
+                       
+                      </button>
                     </form>
                   </>
                 </div>
@@ -237,6 +242,7 @@ export default function LandingPage() {
                             <h2>{vl?.total_orders}x pesanan</h2>
                           </div>
                           <div className="ml-1 p-3">
+                            
                             <h2>{vl?.distance} km</h2>
                           </div>
                         </div>

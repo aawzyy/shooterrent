@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import MapContainer from '../.././components/Maps/GoogleApiWrapper';
+import { Map, GoogleApiWrapper, Marker, Geocoder } from "google-maps-react";
 
 // icons
 import { AiFillHeart, AiOutlineBars } from "react-icons/ai";
@@ -30,8 +32,86 @@ import MapExample from "../../components/Maps/MapExample";
 import { useHistory } from "react-router-dom";
 
 export default function DetailPage() {
-  const history = useHistory();
+  //maps
   const location = useGeoLocation();
+  const [formChart, setformChart] = useState({
+    full_name: ""
+  });
+
+  const [address,setaddress]=useState();
+  const [geocodeResults,setgeocodeResults] = useState()
+  const [currentLocation,setcurrentLocation] = useState()
+  let sendLocation = null
+  const getCurrentLocation = () => {
+    if (navigator && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => { 
+          setcurrentLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          })
+          sendLocation = currentLocation
+          getPlaceName(position.coords.latitude,position.coords.longitude)
+          console.log("current"+location)
+        },
+        (error) => {
+          console.error("Error getting current location:", error);
+        }
+      );
+    }
+  };
+  const geocodeAddress = () => {
+    const geocoder = new window.google.maps.Geocoder();
+    geocoder.geocode({ address }, (results, status) => {
+      if (status === "OK") {
+        const location = results[0].geometry.location;
+        const latitude = location.lat();
+        const longitude = location.lng();
+        setgeocodeResults(results);
+        setcurrentLocation(location);
+        sendLocation = location
+      } else {
+        console.error(
+          "Geocode was not successful for the following reason:",
+          status
+        );
+      }
+    });
+  };
+  const reverseGeocode = async (lat, lng, apiKey) => {
+    try {
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`
+      );
+      const data = await response.json();
+  
+      if (data.results.length > 0) {
+        const address = data.results[0].formatted_address;
+        return address;
+      } else {
+        return 'Address not found';
+      }
+    } catch (error) {
+      console.error('Error in reverse geocoding:', error);
+      return 'Error in reverse geocoding';
+    }
+  };
+  const getPlaceName = async (lat, lng) => {
+    const apiKey = 'AIzaSyCs0FQfOcg2z_-1tHzE6vpCgWqHSiNgA2c'; 
+    const address = await reverseGeocode(lat, lng, apiKey);
+    setformChart({
+      ...formChart,
+      full_address: address,
+    });
+    setaddress(address)
+
+    console.log('Place name:', address);
+    
+  };
+
+
+  const history = useHistory();
+ 
   const data = location?.state?.chartState;
   let { id_vendor } = useParams();
 
@@ -48,10 +128,6 @@ export default function DetailPage() {
   const [selectPackets, setSelectPackets] = useState({});
   const [startDate, setStartDate] = useState(new Date());
   const [start] =useState(new Date(startDate.getFullYear() + '-' + (startDate.getMonth() + 1) + '-' + startDate.getDate()));
-  const [formChart, setformChart] = useState({
-    full_name: "",
-  });
-
 
   const [ListOrders, setListOrders] = useState([]);
   const [listRating, setlistRating] = useState([]);
@@ -77,6 +153,8 @@ export default function DetailPage() {
       ...formChart,
       [e.target.name]: e.target.value,
     });
+    setaddress(e.target.value)
+    console.log(e.target.value)
   };
 
   const handleChat = async (props) => {
@@ -123,7 +201,7 @@ export default function DetailPage() {
               packages: JSON.parse(selectPackets),
               location: location.coordinates,
             };
-            // console.log(chartState);
+            console.log(chartState);
             history.push({
               pathname: "/costumer/chart-orders",
               state: { chartState },
@@ -173,6 +251,7 @@ export default function DetailPage() {
         setloading(false);
       });
     getListOrders();
+    getCurrentLocation();
   }, []);
 
   
@@ -256,6 +335,7 @@ export default function DetailPage() {
                   />
                   <div className="ml-3 row mt-3">
                     <p className="text-gray-700">{dataProduct?.vendor_name}</p>
+                    
                     <p className="text-gray-700">
                       Mulai Dari : Rp.{dataProduct?.lowest_price}
                     </p>
@@ -319,12 +399,33 @@ export default function DetailPage() {
                 className="mb-3 mt-3 border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
                 name="full_address"
+                value={address}
                 onChange={(e) => handlCangeForm(e)}
               />
+              <div style={{margin:"10px"}}>
+          <button
+            className="text-sm text-white p-2 bg-blueGray-600 rounded mr-3"
+            onClick={geocodeAddress}
+          >
+            cari
+          </button>
+          <button
+            className="text-sm text-white p-2 bg-blueGray-600 rounded mr-3 "
+            onClick={getCurrentLocation}
+          >
+            lokasi saat ini
+          </button>
+          
+        </div>
+              {/* <div style={{height:"500px"}}>
+              <MapContainer />
+              </div> */}
+              
+
               <MapExample
                 props={{
-                  lat: location?.coordinates?.lat,
-                  long: location?.coordinates?.lng,
+                  lat: currentLocation,
+                  long: currentLocation,
                 }}
               />
               <hr className="my-4" />

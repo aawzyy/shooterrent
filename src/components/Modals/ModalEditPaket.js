@@ -32,8 +32,9 @@ export default function ModalEdits({ isOpen, onClose, data }) {
       UpdatePackets(token, data.id, dataPostEdit)
       .then((result) => {
         console.log(result);
+        alert('berhasil ubah paket ini')
         onClose()
-        window.location.reload()
+        
       }).catch((err) => {
         console.log(err);
       });
